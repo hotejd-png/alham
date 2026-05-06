@@ -1,0 +1,82 @@
+{
+  "target_wallet": "0xB27BC932bf8110D8F78e55da7d5f0497A18B5b82",
+  "base_urls": {
+    "data_api": "https://data-api.polymarket.com"
+  },
+  "endpoints": {
+    "activity": "/activity",
+    "trades": "/trades",
+    "positions": "/positions",
+    "closed_positions": "/closed-positions"
+  },
+  "http": {
+    "timeout_seconds": 20,
+    "poll_interval_seconds": 0.25,
+    "burst_poll_interval_seconds": 0.15,
+    "burst_window_seconds": 40,
+    "burst_pages_extra": 8,
+    "user_agent": "spy-bot-v3/1.2",
+    "max_retries": 3,
+    "retry_sleep_seconds": 2
+  },
+  "storage": {
+    "db_path": "data/spy_v3.db",
+    "raw_dir": "data/raw",
+    "log_path": "logs/spy_v3.log",
+    "csv_dir": "data/csv",
+    "raw_retention_days": 3,
+    "raw_max_file_mb": 512,
+    "raw_max_total_gb": 20,
+    "window_logs_dir": "data/window_logs",
+    "positions_reports_dir": "data/positions_reports",
+    "account_logs_dir": "data/account_logs"
+  },
+  "filters": {
+    "only_five_minute_crypto": false,
+    "keywords_any": ["btc", "bitcoin", "eth", "ethereum", "sol", "xrp", "doge", "bnb", "hype"],
+    "keywords_window": ["5m", "15m", "1h"]
+  },
+  "pagination": {
+    "activity_limit": 500,
+    "trades_limit": 500,
+    "positions_limit": 50,
+    "max_pages_per_run": 10,
+    "max_trade_offset": 1000,
+    "max_activity_offset": 10000,
+    "live_activity_pages": 20,
+    "live_stop_if_page_has_no_new_rows": false
+  },
+  "features": {
+    "fetch_positions": true,
+    "fetch_closed_positions": true,
+    "fetch_trades_in_live": false,
+    "fetch_trades_in_historical": false
+  },
+  "live": {
+    "session_only": true,
+    "drop_rows_without_timestamp": true,
+    "startup_lookback_seconds": 1800,
+    "reconcile_every_cycles": 15,
+    "reconcile_pages": 6,
+    "positions_refresh_cycles": 20,
+    "positions_pages": 2,
+    "refresh_recent_windows_after_positions": true,
+    "recent_windows_refresh_minutes": 30
+  },
+  "alerts": {
+    "enabled": true,
+    "heartbeat_path": "data/alerts/heartbeat.json",
+    "alerts_log_path": "data/alerts/alerts.log",
+    "no_new_rows_minutes": 10,
+    "api_error_streak_threshold": 3,
+    "alert_cooldown_minutes": 15,
+    "telegram_enabled": false,
+    "telegram_bot_token": "",
+    "telegram_chat_id": ""
+  },
+  "backfill": {
+    "resume_from_checkpoint": true,
+    "checkpoint_overlap_pages": 1,
+    "checkpoint_path": "data/state/backfill_activity_checkpoint.json"
+  }
+}
